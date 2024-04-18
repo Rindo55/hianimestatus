@@ -14,7 +14,7 @@ def send_telegram_message(message):
 
 # Function to check website status
 def check_website_status():
-    url = "https://hianime.to"
+    url = "https://ddl.animxt.fun"
     try:
         response = requests.get(url)
         if response.status_code == 200:
