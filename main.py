@@ -6,10 +6,10 @@ from datetime import datetime
 # Your bot's API credentials
 api_id = "10247139"
 api_hash = '96b46175824223a33737657ab943fd6a'
-bot_token = '6461840799:AAG5Ve1YeSkR1fEQfsI3plN51_oqCm25G9U'
+bot_token = '7083780360:AAHOyNXyzQN1vODhvsfBBYjD-mRSc1ydVEg'
 
 # The channel ID where the bot will send messages
-channel_id = -1002022217944
+channel_id = -1001950011842
 
 # Variable to track website status (initially set to 'up')
 website_status = 'up'
@@ -24,7 +24,7 @@ async def check_website_status():
     while True:
         try:
             # Replace 'https://ddl.animxt.fun' with the URL you want to monitor
-            response = requests.get('https://ddl.animxt.fun')
+            response = requests.get('https://hianime.to')
             if response.status_code != 200:
                 if website_status == 'up':
                     error_message = f"<b><u>HiAnime is reporting error</u></b>[.](https://da.gd/B5OP3c)\n#website #status\n\n🚫 <code>HTTP ERROR {response.status_code}</code>"
