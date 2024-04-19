@@ -16,7 +16,7 @@ async def check_website_status():
     while True:
         try:
             # Replace 'https://hianime.to' with the URL you want to monitor
-            response = requests.get('https://kissanime.ru')
+            response = requests.get('https://ddl.animxt.fun')
             if response.status_code != 200:
                 error_message = f"Website is down! Error code: {response.status_code}"
                 await bot.send_message(channel_id, error_message)
