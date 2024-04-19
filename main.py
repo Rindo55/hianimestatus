@@ -33,7 +33,7 @@ async def check_website_status():
                     website_status = 'down'
             else:
                 if website_status == 'down':
-                    success_message = "Website is back up!"
+                    success_message = "<b><u>HiAnime is Available</u></b>[!](https://da.gd/B5OP3c)\n#website #status\n\n✅ <code>Available</code>"
                     formatted_message = format_message(success_message)
                     await bot.send_message(channel_id, formatted_message)
                     website_status = 'up'
@@ -52,6 +52,7 @@ bot = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 # Start the bot
 async def main():
     await bot.start()
+    print("Powered by HiAnime.to")
     await check_website_status()
 
 if __name__ == '__main__':
