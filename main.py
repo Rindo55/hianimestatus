@@ -1,46 +1,44 @@
+import asyncio
 import requests
-import time
-import json
+from pyrogram import Client
+from pyrogram.types import Message
 
-# Your Telegram Bot Token and Channel ID
-bot_token = "6461840799:AAG5Ve1YeSkR1fEQfsI3plN51_oqCm25G9U"
+# Your bot's API credentials
+api_id = "10247139"
+api_hash = '96b46175824223a33737657ab943fd6a'
+bot_token = '6461840799:AAG5Ve1YeSkR1fEQfsI3plN51_oqCm25G9U'
+
+# The channel ID where the bot will send messages
 channel_id = -1002022217944
 
-# Function to send message to Telegram
-def send_telegram_message(message):
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    data = {"chat_id": channel_id, "text": message}
-    requests.post(url, data=data)
-
 # Function to check website status
-def check_website_status():
-    url = "https://ddl.animxt.fun"
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            return True, None
-        else:
-            return False, response.status_code
-    except requests.exceptions.RequestException as e:
-        return False, str(e)
+async def check_website_status():
+    while True:
+        try:
+            # Replace 'https://hianime.to' with the URL you want to monitor
+            response = requests.get('https://kissanime.ru')
+            if response.status_code != 200:
+                error_message = f"Website is down! Error code: {response.status_code}"
+                await bot.send_message(channel_id, error_message)
+            else:
+                await bot.send_message(channel_id, "Website is back up!")
 
-# Track website status changes
-website_down = False
+        except Exception as e:
+            error_message = f"An error occurred: {str(e)}"
+            await bot.send_message(channel_id, error_message)
 
-# Main loop to check website status periodically
-while True:
-    is_down, error = check_website_status()
-    
-    if is_down and not website_down:
-        website_down = True
-        if isinstance(error, int):
-            send_telegram_message(f"HiAnime is Down\nError Code: {error}")
-        else:
-            send_telegram_message(f"HiAnime is Down\nError: {error}")
-    
-    if not is_down and website_down:
-        website_down = False
-        send_telegram_message("HiAnime is Up")
+        # Check every 5 minutes (adjust the sleep duration as needed)
+        await asyncio.sleep(300)
 
-    # Check every 5 minutes
-    time.sleep(300)
+# Create the bot client
+bot = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
+
+# Start the bot
+async def main():
+    await bot.start()
+    await check_website_status()
+
+if __name__ == '__main__':
+    asyncio.run(main())
+
+
