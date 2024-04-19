@@ -19,7 +19,7 @@ async def check_website_status():
     while True:
         try:
             # Replace 'https://ddl.animxt.fun' with the URL you want to monitor
-            response = requests.get('https://ddl.animxt.fun')
+            response = requests.get('https://hianime.to')
             if response.status_code != 200:
                 if website_status == 'up':
                     error_message = f"Website is down! Error code: {response.status_code}"
