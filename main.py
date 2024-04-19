@@ -28,7 +28,7 @@ async def check_website_status():
             await bot.send_message(channel_id, error_message)
 
         # Check every 5 minutes (adjust the sleep duration as needed)
-        await asyncio.sleep(300)
+        await asyncio.sleep(30)
 
 # Create the bot client
 bot = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
