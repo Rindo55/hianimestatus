@@ -1,6 +1,7 @@
 import asyncio
 import requests
 from pyrogram import Client
+from datetime import datetime
 
 # Your bot's API credentials
 api_id = "10247139"
@@ -13,26 +14,34 @@ channel_id = -1002022217944
 # Variable to track website status (initially set to 'up')
 website_status = 'up'
 
+# Function to format the message with date and time
+def format_message(message):
+    current_time = datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
+    return f"<b>{message}</b>\n\n<blockquote>{current_time}</blockquote>"
 # Function to check website status
 async def check_website_status():
     global website_status
     while True:
         try:
             # Replace 'https://ddl.animxt.fun' with the URL you want to monitor
-            response = requests.get('https://hianime.to')
+            response = requests.get('https://ddl.animxt.fun')
             if response.status_code != 200:
                 if website_status == 'up':
                     error_message = f"Website is down! Error code: {response.status_code}"
-                    await bot.send_message(channel_id, error_message)
+                    formatted_message = format_message(error_message)
+                    await bot.send_message(channel_id, formatted_message)
                     website_status = 'down'
             else:
                 if website_status == 'down':
-                    await bot.send_message(channel_id, "Website is back up!")
+                    success_message = "Website is back up!"
+                    formatted_message = format_message(success_message)
+                    await bot.send_message(channel_id, formatted_message)
                     website_status = 'up'
 
         except Exception as e:
             error_message = f"An error occurred: {str(e)}"
-            await bot.send_message(channel_id, error_message)
+            formatted_message = format_message(error_message)
+            await bot.send_message(channel_id, formatted_message)
 
         # Check every 5 minutes (adjust the sleep duration as needed)
         await asyncio.sleep(30)
