@@ -16,8 +16,8 @@ website_status = 'up'
 
 # Function to format the message with date and time
 def format_message(message):
-    current_time = datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
-    return f"<b>{message}</b>\n\n<blockquote>{current_time}</blockquote>"
+    current_time = datetime.now().strftime("<code>%Y-%m-%d</code> at <code>%H:%M:%S</code>")
+    return f"{message}\n\n{current_time}"
 # Function to check website status
 async def check_website_status():
     global website_status
@@ -27,9 +27,9 @@ async def check_website_status():
             response = requests.get('https://ddl.animxt.fun')
             if response.status_code != 200:
                 if website_status == 'up':
-                    error_message = f"Website is down! Error code: {response.status_code}"
+                    error_message = f"<b><u>HiAnime is reporting error</u></b>[.](https://da.gd/B5OP3c)\n#website #status\n\n🚫<code>HTTP ERROR {response.status_code}</code>"
                     formatted_message = format_message(error_message)
-                    await bot.send_message(channel_id, formatted_message)
+                    await bot.send_message(channel_id, formatted_message, disable_web_page_preview=False)
                     website_status = 'down'
             else:
                 if website_status == 'down':
