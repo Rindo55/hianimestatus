@@ -30,7 +30,7 @@ async def check_website_status():
                 if website_status == 'down':
                     success_message = "<b><u>HiAnime is Available</u></b>[!](https://da.gd/B5OP3c)\n#website #status\n\n✅ <code>Available</code>"
                     msg = timee(success_message)
-                    await bot.send_message(channel_id, msg)
+                    await bot.send_message(channel_id, msg, disable_web_page_preview=False)
                     website_status = 'up'
 
         except Exception as e:
