@@ -23,7 +23,7 @@ async def check_website_status():
             if response.status_code != 200:
                 if website_status == 'up':
                     error_message = f"<b><u>HiAnime is reporting error</u></b>[.](https://da.gd/B5OP3c)\n#website #status\n\n🚫 <code>HTTP ERROR {response.status_code}</code>"
-                    formatted_message = format_message(error_message)
+                    formatted_message = timee(error_message)
                     await bot.send_message(channel_id, formatted_message, disable_web_page_preview=False)
                     website_status = 'down'
             else:
